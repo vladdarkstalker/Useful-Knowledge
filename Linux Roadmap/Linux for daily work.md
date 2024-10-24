@@ -18,7 +18,12 @@
 10. `grep –r "search_string" /dir/...` – рекурсивно ищет вхождения строки в файлах.
 11. `su – имя_пользователя` – переключение на другого пользователя в Linux.
 12. `./myscript` or `sh script` – позволяет запускать скрипты, не забывая дать права на исполнение.
-
+13. `uniq` – удаляет дубликаты, но не обнаруживает дублирующиеся линии, если они не соседи, обойти это ограничение: `sort reading.txt | uniq`.
+	`uniq -c reading.txt` – количество копий для каждой строки в файле.
+	`uniq -u reading.txt` – уникальные значения.
+	`uniq -d reading.txt` – дублирующиеся значения.
+14. `wc` – показывает полное количество слов в файле, покажет количество строк (lines), число слов (words) и количество байтов (char), соответственно (`-l`, `-w`, `-c`).'
+15. `nl` – количество строк в файле.
 
 ## Регулярные выражения (метасимволы)
 
@@ -47,6 +52,17 @@
 10. `[0-9][a-z]` – ищутся строки, содержащие комбинацию: цифра-прописная буква 
 11. `[^123]` – ищутся строки, не содержащие цифр "1" или "2" или "3"
 
+## Input & Output & Error
+
+The shell in Linux provides a robust way of managing input and output streams of a command or program, this mechanism is known as Redirection. Linux being a multi-user and multi-tasking operating system, every process typically has 3 streams opened:
+
+- Standard Input (stdin, 0) - This is where the process reads its input from. The default is the keyboard.
+- Standard Output (stdout, 1) - The process writes its output to stdout. By default, this means the terminal.
+- Standard Error (stderr, 2) - The process writes error messages to stderr. This also goes to the terminal by default.
+
+Способ перенаправить stdout и stderr в файл: `ls /fake/directory &> peanuts.txt`.
+
+Полностью избавиться от сообщений stderr: `ls /fake/directory 2> /dev/null`.
 
 ## Команды Nano
 
@@ -88,6 +104,9 @@ Using .bash_p﻿rofile:
 3. `source ~/.bash_profile` – reload the .bashrc file with the following source command for changes to take effect.
 4. `echo $VAR1` – print out the new variable.
 
+Вы можете увидеть переменные среды, написав: `env`.
+
+`echo $PATH` вернет список путей, разделенных двоеточием, которые ваша система ищет при запуске команды.
 
 ## Set system–wide environment variables:
 
@@ -125,7 +144,6 @@ Environment variables defined in the system–wide or user–wide configuration 
 – `/etc/profile` or `/etc/profile.d/`: Choose when you need to set system–wide environment variables for all users during login shell sessions, keeping configurations organized using custom scripts.
 – `env` **command in the terminal**: Choose when you need to set environment variables temporarily for a specific command execution without affecting the current shell session or other processes.
 – `/etc/environment`: Choose when you need to set system–wide environment variables that persist across sessions and reboots, affecting all users and processes on the system.
-
 
 ## Directory Hierarchy
 
@@ -195,6 +213,7 @@ Environment variables defined in the system–wide or user–wide configuration 
 22. `zip` – создает ZIP–архивы.
 23. `unzip` – извлекает файлы из ZIP–архивов.
 24. `file` – покажет описание содержимого файла.
+25. `expand` – чтобы изменить TABы на пробелы и на оборот `unexpand`.
 
 
 ## Команды Linux для управления пользователями
@@ -234,19 +253,20 @@ Environment variables defined in the system–wide or user–wide configuration 
 9. `snap install` – устанавливает приложение из snap–пакета.
 10. `snap remove` – удаляет установленное snap–приложение.
 11. `snap list` – отображает список установленных snap–приложений.
-12. `systemctl start` – запускает системную службу.
-13. `systemctl stop` – останавливает системную службу.
-14. `systemctl restart` – перезапускает системную службу.
-15. `systemctl enable` – включает автозапуск системной службы при загрузке системы.
-16. `systemctl disable` – отключает автозапуск системной службы при загрузке системы.
-17. `systemctl suspend` – contents of memory are moved to the swap location; the boot loader is configured to boot directly to the current kernel; the system shuts down (no–power mode); upon power up, the system reloads itself from swap.
-18. `systemctl hibernate` – applications are stopped; system state is moved to RAM. the system remains powered on in a low–power state.
-19. `service <service> start` – запускает службу.
-20. `service <service> stop` – останавливает службу.
-21. `service <service> restart` – перезапускает службу.
-22. `service <service> status` – отображает статус службы.
-23. `whatis` – дает краткое описание любой установленной программы.
-24. `whereis` – полный путь к программе.
+12. `systemctl` – is widely used command on Linux systems.
+13. `systemctl start` – запускает системную службу.
+14. `systemctl stop` – останавливает системную службу.
+15. `systemctl restart` – перезапускает системную службу.
+16. `systemctl enable` – включает автозапуск системной службы при загрузке системы.
+17. `systemctl disable` – отключает автозапуск системной службы при загрузке системы.
+18. `systemctl suspend` – contents of memory are moved to the swap location; the boot loader is configured to boot directly to the current kernel; the system shuts down (no–power mode); upon power up, the system reloads itself from swap.
+19. `systemctl hibernate` – applications are stopped; system state is moved to RAM. the system remains powered on in a low–power state.
+20. `service <service> start` – запускает службу.
+21. `service <service> stop` – останавливает службу.
+22. `service <service> restart` – перезапускает службу.
+23. `service <service> status` – отображает статус службы.
+24. `whatis` – дает краткое описание любой установленной программы.
+25. `whereis` – полный путь к программе.
 
 
 ## Команды Linux для управления системой
